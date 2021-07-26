@@ -9,7 +9,7 @@
     </div>
 */
 
-const root = document.querySelector('#root')
+const root = document.querySelector('.root')
 function createContent({title, content}) {
 
     const contentDiv = document.createElement('div')
