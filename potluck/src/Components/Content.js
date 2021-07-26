@@ -1,3 +1,4 @@
+import React from 'react'
 /*element structure
     <div>
             <img/>
