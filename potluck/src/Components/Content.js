@@ -10,7 +10,7 @@ import React from 'react'
     </div>
 */
 
-const root = document.querySelector('.root')
+const app = document.querySelector('.app')
 function createContent({title, content}) {
 
     const contentDiv = document.createElement('div')
@@ -35,4 +35,6 @@ function createContent({title, content}) {
 }
 
 const testContent = createContent({title: 'test title', content: 'test content'})
-root.appendChild(testContent)
+app.appendChild(testContent)
+// basic marketing content about application features
+// image plus text content

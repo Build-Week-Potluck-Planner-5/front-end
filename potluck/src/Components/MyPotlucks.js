@@ -1,0 +1,2 @@
+// table with rows that have columns of... potluck_name, potluck_date, potluck_time
+// each row has a food button that either opens a modal or sends you to another food page for that particular potluck
