@@ -30,7 +30,7 @@ function Registration(props) {
         { withCredentials: true }
       )
       .then((resp) => {
-        return console.log(resp.data);
+        return console.log("registration response", resp.data);
       })
       .catch((err) => {
         console.log("registration error", err);
@@ -38,7 +38,7 @@ function Registration(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         <input
           onChange={handleChange}
