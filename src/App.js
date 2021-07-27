@@ -26,7 +26,9 @@ function App() {
         <Route path="/dashboard">
           {/* <MyPotlucks />
           <PotluckFood />
-          <PotluckInvites /> */}
+          <PotluckInvites /> 
+          <CreatePotluck />*/}
+
         </Route>
       </Switch>
       <Footer />
