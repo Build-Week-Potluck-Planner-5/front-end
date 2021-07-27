@@ -1,16 +1,18 @@
 // basic marketing content about application features
 // image plus text content
 import React from 'react'
-import ReactDOM from 'react-dom';
 
-const contentDiv = React.createElement('div', {}, [contentImg, infoDiv])
-const contentImg = React.createElement('img', {src: ''})
-const infoDiv = React.createElement('div', {}, [contentTitle, contentInfo, contentButton])
-const contentTitle = React.createElement('h3', {}, title)
-const contentInfo = React.createElement('p', {}, content)
-const contentButton = React.createElement('button', {}, 'Learn More')
+function Content () {
+    return(
+        <div className='contentDiv'>
+            <img className='contentImg' src='' alt=''/>
+            <div className='infoDiv'>
+                <h3>Title</h3>
+                <p>lorem ipsum</p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    )
+}
 
-ReactDOM.render(
-    contentDiv,
-    document.getElementsByClassName('App')
-);
+export default Content

@@ -3,14 +3,17 @@
 // conditional logic to show logout button if logged in, if !logged in show login button
 
 import React from 'react'
-import ReactDOM from 'react-dom';
 
-const nav = React.createElement('nav', {}, [home, about, contact])
-const home = React.createElement('a', {class: nav-item}, 'Home')
-const about = React.createElement('a', {class: nav-item}, 'About')
-const contact = React.createElement('a', {class: nav-item}, 'Contact')
+function Header () {
+    return (
+        <nav>
+            <a href='#Home'>Home</a>
+            <a href='#About'>About</a>
+            <a href='#Contact'>Contact</a>
+            <a href=''>Sign Up</a>
+            <a href=''>Login</a>
+        </nav>
+    )
+}
 
-ReactDOM.render(
-    nav,
-    document.getElementsByClassName('App')
-)
+export default Header
