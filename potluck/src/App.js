@@ -3,6 +3,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import Registration from "./Components/Registration";
 import Login from "./Components/Login";
+import Header from './Components/Header'
+import Hero from './Components/Hero'
+import Content from "./Components/Content";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -20,9 +24,9 @@ function App() {
           <Login />
         </Route>
         <Route path="/dashboard">
-          <MyPotlucks />
+          {/* <MyPotlucks />
           <PotluckFood />
-          <PotluckInvites />
+          <PotluckInvites /> */}
         </Route>
       </Switch>
       <Footer />

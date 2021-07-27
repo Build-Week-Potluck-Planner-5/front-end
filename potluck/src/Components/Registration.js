@@ -21,29 +21,29 @@ function Registration(props) {
     return setUserData(...userData, { [evt.target.name]: evt.target.value });
   };
   console.log(userData);
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const { username, first_name, last_name, password } = userData;
-    axios
-      .post(
-        url,
-        {
-          user: {
-            username: username,
-            first_name: first_name,
-            last_name: last_name,
-            password: password,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((resp) => {
-        return console.log("registration response", resp.data);
-      })
-      .catch((err) => {
-        console.log("registration error", err);
-      });
-  };
+  // const handleSubmit = (evt) => {
+  //   evt.preventDefault();
+  //   const { username, first_name, last_name, password } = userData;
+  //   axios
+  //     .post(
+  //       url,
+  //       {
+  //         user: {
+  //           username: username,
+  //           first_name: first_name,
+  //           last_name: last_name,
+  //           password: password,
+  //         },
+  //       },
+  //       { withCredentials: true }
+  //     )
+  //     .then((resp) => {
+  //       return console.log("registration response", resp.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("registration error", err);
+  //     });
+  // };
 
   return (
     <form>
