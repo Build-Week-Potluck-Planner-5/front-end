@@ -6,7 +6,7 @@ function Hero () {
     return(
         <div className='heroDiv'>
             <img className='heroImg' src='' alt=''/>
-            <button>Sign Up</button>
+            <Link to ='/signup'><button>Sign Up</button></Link>
         </div>
     )
 }

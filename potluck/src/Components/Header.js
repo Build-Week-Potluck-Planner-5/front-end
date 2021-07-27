@@ -6,13 +6,20 @@ import React from 'react'
 
 function Header () {
     return (
-        <nav>
-            <a href='#Home'>Home</a>
-            <a href='#About'>About</a>
-            <a href='#Contact'>Contact</a>
-            <a href=''>Sign Up</a>
-            <a href=''>Login</a>
-        </nav>
+        <header>
+            <nav>
+            <Link to='/'>
+                <div>
+                    <img src='' alt=''/>
+                </div>
+            </Link>
+                <div>
+                    <Link to ='/'>Home</Link>
+                    <Link to ='/signup'>Sign Up</Link>
+                    <Link to ='/login'>Login</Link>
+                </div>
+            </nav>
+        </header>
     )
 }
 

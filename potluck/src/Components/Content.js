@@ -9,7 +9,6 @@ function Content () {
             <div className='infoDiv'>
                 <h3>Title</h3>
                 <p>lorem ipsum</p>
-                <button>Learn More</button>
             </div>
         </div>
     )

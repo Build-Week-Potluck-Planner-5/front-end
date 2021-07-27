@@ -4,6 +4,7 @@ import React from 'react'
 function Footer () {
     return(
         <footer>
+            <h3>Contact Us</h3>
             <div>
                 <address>1234 Somewhere Road #5432 Nashville, TN 00000 United States of America</address>
                 <a href='mailto:information@untitled.tld'>information@untitled.tld</a>
