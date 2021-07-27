@@ -1,4 +1,14 @@
+
+
+
+
 import React, { useState, useEffect } from "react";
+
+
+// username
+// password
+// submit button
+// nice to have -- form validation and error handling messages
 
 function Login(props) {
   const [userData, setUserData] = useState({
@@ -51,3 +61,6 @@ function Login(props) {
 }
 
 export default Login;
+
+
+
