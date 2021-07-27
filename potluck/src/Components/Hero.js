@@ -1,13 +1,13 @@
 // image with marketing copy
 // sign up button which sends you to registration
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-function createHero() {
-    const heroDiv = document.createElement('div')
-    const heroImg = document.createElement('img')
-    const signUpBtn = document.createElement('button')
+const heroDiv = React.createElement('div', {}, [heroImg, signUpBtn])
+const heroImg = React.createElement('img', {src: ''}, )
+const signUpBtn = React.createElement('button', {}, 'Sign Up')
 
-    heroDiv.appendChild(heroImg)
-    heroImg.appendChild(signUpBtn)
-
-    return heroDiv
-}
+ReactDOM.render(
+    heroDiv,
+    document.getElementsByClassName('App')
+)

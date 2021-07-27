@@ -1,29 +1,17 @@
 // basic text content footer... up to you
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-function createFooter () {
-    const footer = document.createElement('footer')
-    const footerTitle = document.createElement('h3')
-    const footerDiv = document.createElement('div')
-    const address = document.createElement('address')
-    const email = document.createElement('a')
-    const phoneNumber = document.createElement('a')
-    const copyrightDiv = document.createElement('div')
-    const copyrightText = document.createElement('p')
+const footer = React.createElement('footer',{}, [footerTitle, footerDiv, copyrightDiv])
+const footerTitle = React.createElement('h3', {}, 'Contact Us')
+const footerDiv = React.createElement('div', {}, [address, email, phoneNumber])
+const address = React.createElement('address', {}, '1234 Somewhere Road #5432 Nashville, TN 00000 United States of America')
+const phoneNumber = React.createElement('a', {href: 'mailto:information@untitled.tld'}, 'information@untitled.tld')
+const email = React.createElement('a', {href: 'tel:1-000-000-0000'}, '1-000-000-0000')
+const copyrightDiv = React.createElement('div',{}, [copyrightText])
+const copyrightText = React.createElement('p', {}, '© Untitled')
 
-    footer.appendChild(footerTitle)
-    footer.appendChild(footerDiv)
-    footer.appendChild(copyrightDiv)
-    footerDiv.appendChild(address)
-    footerDiv.appendChild(email)
-    footerDiv.appendChild(phoneNumber)
-    copyrightDiv.appendChild(copyrightText)
-
-    footerTitle.textContent = 'Contact Us'
-    address.textContent = '1234 Somewhere Road #5432 Nashville, TN 00000 United States of America'
-    copyrightText.textContent = '© Untitled'
-
-    phoneNumber.href ='tel:1-000-000-0000'
-    email.href ='mailto:information@untitled.tld'
-
-    return footer
-}
+ReactDOM.render(
+    footer,
+    document.getElementsByClassName('App')
+)
