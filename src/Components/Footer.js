@@ -7,11 +7,11 @@ function Footer () {
             <h3>Contact Us</h3>
             <div>
                 <address>1234 Somewhere Road #5432 Nashville, TN 00000 United States of America</address>
-                <a href='mailto:information@untitled.tld'>information@untitled.tld</a>
-                <a href='tel:1-000-000-0000'>1-000-000-0000</a>
+                <p><a href='mailto:information@untitled.tld'>information@untitled.tld</a></p>
+                <p><a href='tel:1-000-000-0000'>1-000-000-0000</a></p>
             </div>
             <div>
-                <p>© Untitled</p>
+                <h5>© Untitled</h5>
             </div>
         </footer>
     )
