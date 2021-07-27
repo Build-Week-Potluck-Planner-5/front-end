@@ -20,12 +20,12 @@ function App() {
           <Login />
         </Route>
         <Route path="/dashboard">
-          <MyPotlucks />
-          <PotluckFood />
-          <PotluckInvites />
+          {/* <MyPotlucks /> */}
+          {/* <PotluckFood /> */}
+          {/* <PotluckInvites /> */}
         </Route>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
