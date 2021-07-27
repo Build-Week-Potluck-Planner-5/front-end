@@ -3,6 +3,7 @@
 // conditional logic to show logout button if logged in, if !logged in show login button
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header () {
     return (

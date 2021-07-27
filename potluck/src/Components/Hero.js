@@ -1,6 +1,7 @@
 // image with marketing copy
 // sign up button which sends you to registration
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Hero () {
     return(
