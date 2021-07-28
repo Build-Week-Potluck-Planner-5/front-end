@@ -1,7 +1,8 @@
+import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { reach } from "yup";
-import axios from 'axios';
+import axios from "axios";
 
 // username
 // password
@@ -28,6 +29,7 @@ function Login(props) {
       .min(3, "Username must be at least 3 characters long"),
     password: yup.string().trim().required("Must enter your password"),
   });
+  const history = useHistory();
 
   const validate = (name, value) => {
     reach(loginSchema, name)
@@ -44,17 +46,33 @@ function Login(props) {
     setUserData({ ...userData, [name]: value });
   };
   console.log(userData);
-    const handleSubmit = (evt) => {
-      evt.preventDefault();
-      // axios
-      //   .post('https://potluck-back-end.herokuapp.com/api/auth/login', userData)
-      //   .then(res => {
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const credentials = {
+      username: userData.username,
+      password: userData.password,
     };
+    // axios
+    //   .post("https://potluck-back-end.herokuapp.com/api/auth/login", userData)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    axios
+      .post(
+        "https://potluck-back-end.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div>
