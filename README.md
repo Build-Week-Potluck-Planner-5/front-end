@@ -29,29 +29,16 @@ REQUEST
     _____________
 
 RESPONSE
-
-    -- Success --
     {
         "first_name": "foo",
         "user_id": 7,
         "username": "foobar"
     }
 
-    -- Username not unique --
-    {
-        "message": "username taken"
-    }
-
-    -- Missing required field --
-    {
-        "message": "username and password are required"
-    }
-
 
 **/api/auth/login** --> username and password are required
 
 REQUEST
-
         req.body must be: 
     {
         username: "foobar",
@@ -72,25 +59,32 @@ REQUEST
 
 RESPONSE
 
-    -- Success --
     {
         "message": "welcome, foobar",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo4LCJ1c2VybmFtZSI6ImRhdmVkYXZlIiwiaWF0IjoxNjI3NDUyNDI3LCJleHAiOjE2Mjc1Mzg4Mjd9.6FWVD93oWilHuMRdWc2OM2IJue6P5Tkr-cXqIwDDWok"
     }
 
-    -- Username not found --
+
+**/api/potlucks**
+fetches all potlucks for the current logged in user where attending === true
+RESPONSE
+[
     {
-        "message": "username does not exist"
+        "potluck_name": "cookout",
+        "potluck_date": "August 1",
+        "potluck_time": "3pm",
+        "organizer": "foobar"
     }
+]
 
-    -- Password incorrect --
+**/api/potlucks/invites**
+fetches all potlucks for the current logged in user where attending === false
+RESPONSE
+[
     {
-        "message": "invalid credentials"
+        "potluck_name": "barbeque",
+        "potluck_date": "July",
+        "potluck_time": "8pm",
+        "organizer": "foobar"
     }
-
-    -- Missing required field --
-    {
-        "message": "username and password are required"
-    }
-
-
+]
