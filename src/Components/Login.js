@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { reach } from "yup";
+import axios from 'axios';
 
 // username
 // password
@@ -43,31 +44,19 @@ function Login(props) {
     setUserData({ ...userData, [name]: value });
   };
   console.log(userData);
-  //   const handleSubmit = (evt) => {
-  //     evt.preventDefault();
-  //     const { username, first_name, last_name, password } = userData;
-  //     axios
-  //       .post(
-  //         url,
-  //         {
-  //           user: {
-  //             username: username,
-  //
-  //
-  //             password: password,
-  //           },
-  //         },
-  //         { withCredentials: true }
-  //       )
-  //       .then((resp) => {
-  //         return console.log("login response", resp.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log("login error", err);
-  //       });
-  //   };
+    const handleSubmit = (evt) => {
+      evt.preventDefault();
+      // axios
+      //   .post('https://potluck-back-end.herokuapp.com/api/auth/login', userData)
+      //   .then(res => {
+      //     console.log(res.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+    };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <input
           onChange={handleChange}
