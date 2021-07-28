@@ -20,13 +20,35 @@ import axios from "axios";
 //     return <li>{name}</li>
 // }
 const initialFoodList = [];
-const initialDisabled = true;
 
 function PotluckFood(props) {
-  const [disable, setDisable] = useState(initialDisabled);
-  const [foodData, setFoodData] = useState(initialFoodList);
+  const [baseData, setBaseData] = useState([
+    {
+      food_name: "tomatoes",
+      food_owner: "Jordan",
+    },
+    {
+      food_name: "pickles",
+      food_owner: "Josh",
+    },
+    {
+      food_name: "bread",
+      food_owner: null,
+    },
+  ]);
 
-  const handleAssign = () => {};
+  const [foodData, setFoodData] = useState(initialFoodList);
+  const handleCancel = (foodItem, i) => {
+    const toCancelData = [...baseData];
+    toCancelData[i].food_owner = null;
+    setBaseData(toCancelData);
+  };
+
+  const handleAssign = (foodItem, i) => {
+    const newData = [...baseData];
+    newData[i].food_owner = localStorage.getItem("username");
+    setBaseData(newData);
+  };
   useEffect(() => {
     axios
       .get("url")
@@ -41,11 +63,25 @@ function PotluckFood(props) {
   return (
     <div>
       <ul>
-        {props.foodList.map((foodItem) => {
+        {baseData.map((foodItem, i) => {
           return (
             <li>
-              {foodItem.name}{" "}
-              <button onCLick={handleAssign(foodItem)}>Bring Food</button>
+              {foodItem.food_name}{" "}
+              <button
+                disabled={foodItem.food_owner}
+                onClick={() => {
+                  handleAssign(foodItem, i);
+                }}
+              >
+                Bring Food
+              </button>
+              <button
+                onClick={() => {
+                  handleCancel(foodItem, i);
+                }}
+              >
+                X
+              </button>
             </li>
           );
         })}
