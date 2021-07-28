@@ -1,3 +1,4 @@
+import { useHistory } from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 import { reach } from "yup";
@@ -63,32 +64,47 @@ function Registration(props) {
     setUserData({ ...userData, [name]: value });
   };
   console.log(userData);
-  //   const handleSubmit = (evt) => {
-  //     evt.preventDefault();
-  //     const { username, first_name, last_name, password } = userData;
-  //     axios
-  //       .post(
-  //         url,
-  //         {
-  //           user: {
-  //             username: username,
-  //             first_name: first_name,
-  //             last_name: last_name,
-  //             password: password,
-  //           },
-  //         },
-  //         { withCredentials: true }
-  //       )
-  //       .then((resp) => {
-  //         return console.log("registration response", resp.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log("registration error", err);
-  //       });
-  //   };
+  const history = useHistory();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    // const { username, first_name, last_name, password } = userData;
+    axios
+      .post(
+        "https://potluck-back-end.herokuapp.com/api/auth/register",
+        userData
+      )
+      .then((resp) => {
+        console.log("registration response", resp.data);
+      })
+      // .then((res) => {
+      //   localStorage.setItem("token", res.data.token);
+      //   history.push("/dashboard");
+      // })
+
+      .catch((err) => {
+        console.log("registration error", err);
+      });
+    const credentials = {
+      username: userData.username,
+      password: userData.password,
+    };
+    axios
+      .post(
+        "https://potluck-back-end.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <input
           onChange={handleChange}
