@@ -15,7 +15,7 @@ REQUEST
 
     Note: 
     the axios request should look something like --
-    axios()
+    axios
         .post("https://potluck-back-end.herokuapp.com/api/auth/register", state.credentials)
         .then(res => {
             console.log(res);
@@ -60,11 +60,11 @@ REQUEST
 
     Note: 
     the axios request should look something like --
-    axios()
+    axios
         .post("https://potluck-back-end.herokuapp.com/api/auth/login", state.credentials)
         .then(res => {
             localStorage.setItem("token", res.data.token);
-            history.push("/dashboard")
+            history.push("/dashboard");
         })
         .catch(err => {
             console.log(err);
