@@ -56,7 +56,7 @@ return(
     <div>
     <div className="guestInvite">
         <h2 className="guestHeader">Invite Guests</h2>
-        <div class='guestInfo'>
+        <div className='guestInfo'>
 
             <form onClick={handleSubmit}>
                 {guest.map(guestInfo => (
@@ -69,7 +69,7 @@ return(
                         </div>
                 ))}
                 <div className="button">
-                    <button>Invite Guest</button>
+                    <button>Invite Guests</button>
                 </div>
             </form>
         </div>
