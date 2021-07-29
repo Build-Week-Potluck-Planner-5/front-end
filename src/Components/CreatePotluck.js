@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios"
-import {axiosWithAuth} from "../../potluck/src/axiosWithAuth"
-import {useHistory} from 'react-router-dom'
+import {axiosWithAuth} from "../axiosWithAuth"
+import {useHistory} from "react-router-dom"
 
 // ideally a modal but could be another page
 // form
@@ -13,7 +13,7 @@ import {useHistory} from 'react-router-dom'
 // potluck_invitees (same as food items -- want an input field plus a button to add another invitee)
 // submit
 
-const initialState = {name: "", date: "", time: "", location: "", host: "", food: ""}
+const initialState = {name: "", date: "", time: "", location: "", host: "", items: ""}
 
 function CreatePotluck() {
     const [form, setForm] = useState(initialState)
@@ -22,7 +22,7 @@ function CreatePotluck() {
     const history = useHistory()
 
     useEffect(() => {
-        axiosWithAuth().get("Insert user api here")
+        axiosWithAuth().get("") //user api
         .then(res=>{
           // console.log(res)
           setCurrUser(res.data)
@@ -43,9 +43,9 @@ function CreatePotluck() {
           return {itemid: Date.now(), name: item, guest: "", picked: false}
         })
         console.log(itemsArray)
-        const newPotluck = {name: form.name, location: form.location, date: form.date, time: form.time, organizer: form.organizer, items: itemsArray}
+        const newPotluck = {name: form.name, date: form.date, time: form.time, location: form.location, host: form.host, items: itemsArray}
         console.log(newPotluck)
-        axiosWithAuth().post("Insert potluck api here", newPotluck)
+        axiosWithAuth().post("", newPotluck) //potluck api
           .then(res=>{
             console.log(res);
             history.push("/") //My Potlucks
@@ -54,7 +54,7 @@ function CreatePotluck() {
       }
 
       return (
-          <form>
+          <form onSubmit={formSubmit}> 
             <label>
                 Name
                 <input
