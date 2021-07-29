@@ -5,6 +5,11 @@ import styled from 'styled-components'
 const StyledFooter = styled.div`
     margin: 2% 5%;
     padding: 2% 0;
+
+    a{
+        text-decoration:none;
+        color:black;
+    }
 `
 
 function Footer () {

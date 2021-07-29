@@ -20,14 +20,35 @@ const StyledDashboard = styled.div`
     }
 
     .links{
-        box-shadow: 0 0 3px 1px #888888;
-        border-radius: 50px;
-        padding: 1rem 2.5rem;
+        padding: 2rem 5rem 2rem 5rem;
+        border:1px solid #DADADA;
+        border-bottom:none;
     }
 
     h3{
         color: black;
     }
+
+    .color1{
+        background-color: #7172F7;
+        padding: 1rem 5rem 2rem 2.5rem;
+        border:1px solid #DADADA;
+        border-top:none;
+    }
+
+    .color2{
+        background-color: #B971F7;
+        padding: 1rem 5rem 2rem 2.5rem;
+        border:1px solid #DADADA;
+        border-top:none;
+    }
+    .color3{
+        background-color: #F771F7;
+        padding: 1rem 5rem 2rem 2.5rem;
+        border:1px solid #DADADA;
+        border-top:none;
+    }
+
 `
 
 
@@ -43,18 +64,21 @@ function Dashboard () {
                 <div className = 'links'>
                     <h3>My Potlucks</h3>
                 </div>
+                <div className='color1'></div>
             </Link>
 
             <Link to='/' style={{ textDecoration: 'none' }}>
                 <div className = 'links'>
                     <h3>Create a Potluck</h3>
-                    </div>
+                </div>
+                <div className='color2'></div>
             </Link>
 
             <Link to='/' style={{ textDecoration: 'none' }}>
                 <div className = 'links'>
                     <h3>Potluck invites</h3>
-                    </div>
+                </div>
+                <div className='color3'></div>
             </Link>
         </div>
         </StyledDashboard>
