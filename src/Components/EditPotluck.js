@@ -2,12 +2,12 @@ import React, {useState, useEffect} from "react"
 import {axiosWithAuth} from "../axiosWithAuth"
 import {useHistory} from "react-router-dom"
 
-const initialState = {name: "", date: "", time: "", location: "", items: "", newItem: ""}
+const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potluck_location: "", organizer: "", food: ""}
 
 function DeleteItems(props) {
     const {obj, currItems, setCurrItems}= props
     const deleteItemClick = (id) => {
-        axiosWithAuth().delete(`api${id}`) //potluck items api
+        axiosWithAuth().delete(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //potluck items api
         setCurrItems(currItems.filter(item=>item.itemid!==id))
       }
     return (
@@ -24,7 +24,7 @@ function EditPotluck() {
     const {id} = useParams()
 
     useEffect(() => {
-        axiosWithAuth().get(`api${id}`) //ptluck api
+        axiosWithAuth().get(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //ptluck api
         .then(res=>{
           console.log(res)
           setPotluckData(res.data)
@@ -57,10 +57,10 @@ function EditPotluck() {
         // console.log(itemsArray)
         const editedPotluck = {...potluckData, name: form.name, location: form.location, date: form.date, time: form.time, items: []}
         console.log("edited: ",editedPotluck)
-        axiosWithAuth().put(`api${id}`, editedPotluck) //potluck api
+        axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, editedPotluck) //potluck api
           .then(res=>{
             console.log(res);
-            history.push("/") //MyPotluck
+            history.push("/MyPotlucks") //MyPotluck
           })
           .catch(err=>console.log(err))
         
@@ -68,7 +68,7 @@ function EditPotluck() {
   
         const newItemClick = () => {
           const createdItem={items: [newItem]}
-          axiosWithAuth().put(`api${id}`, createdItem) //potluck api
+          axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, createdItem) //potluck api
           setCurrItems([...currItems, newItem])
           setNewItem({name: "", guest: "", picked: false})
         }
@@ -117,7 +117,7 @@ function EditPotluck() {
             /></label>
             <p>Food and Beverages</p>
                 <div>
-                {currItems.length<1 ? <p>This potluck has no items! Add an item below.</p> : currItems.map((obj) => {
+                {currItems.length<1 ? <p>No Items in Potluck. Add items below.</p> : currItems.map((obj) => {
                   return (
                     <DeleteItems obj={obj} setCurrItems={setCurrItems} currItems={currItems} />
                     )})

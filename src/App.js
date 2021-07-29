@@ -11,6 +11,7 @@ import Dashboard from "./Components/Dashboard";
 import MyPotlucks from "./Components/MyPotlucks"
 import PotluckFood from "./Components/PotluckFood"
 import CreatePotluck from "./Components/CreatePotluck"
+import PotluckInvites from "./Components/PotluckInvites"
 
 function App() {
   return (
@@ -30,14 +31,17 @@ function App() {
         <Route path="/dashboard">
           <Dashboard/>
         </Route>
-      <Route path="/mypotlucks">
+      <Route path="/MyPotlucks">
           <MyPotlucks />
       </Route>
       <Route path="/potluckfood">
         <PotluckFood/>
       </Route>
-      <Route path='/createpotluck'>
+      <Route path='/CreatePotluck'>
         <CreatePotluck/>
+      </Route>
+      <Route path="/PotluckInvites">
+        <PotluckInvites />
       </Route>
       </Switch>
       <Footer />
