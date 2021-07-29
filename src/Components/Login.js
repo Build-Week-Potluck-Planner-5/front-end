@@ -66,7 +66,9 @@ function Login(props) {
         credentials
       )
       .then((res) => {
+        console.log(res.data);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.message.split(", ")[1]);
         history.push("/dashboard");
       })
       .catch((err) => {
