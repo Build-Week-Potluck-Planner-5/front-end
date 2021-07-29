@@ -12,20 +12,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { axiosWithAuth } from "../axiosWithAuth";
 
 const initialFoodList = [
-  {
-    food_name: "tomatoes",
-    username: null,
-  },
-  {
-    food_name: "pickles",
-    username: "Josh",
-  },
-  {
-    food_name: "bread",
-    username: null,
-  },
+  // {
+  //   food_name: "tomatoes",
+  //   username: null,
+  // },
+  // {
+  //   food_name: "pickles",
+  //   username: "Josh",
+  // },
+  // {
+  //   food_name: "bread",
+  //   username: null,
+  // },
 ];
 
 function PotluckFood(props) {
@@ -50,23 +51,10 @@ function PotluckFood(props) {
     toCancelData[i].username = null;
     setFoodData(toCancelData);
   };
+
   useEffect(() => {
     axios
-      .get("https://potluck-back-end.herokuapp.com/api/potlucks", {
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        console.log("/potluck axios call", res.data);
-      })
-      .catch((err) => {
-        console.log("after first api call", err);
-      });
-  });
-  useEffect(() => {
-    axios
-      .get("https://potluck-back-end.herokuapp.com/api/potlucks/0", {
+      .get("https://potluck-back-end.herokuapp.com/api/potlucks/2", {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -74,7 +62,7 @@ function PotluckFood(props) {
       .then(
         (res) => {
           console.log("axios call with index", res.data);
-          // setFoodData(res.data.food);
+          setFoodData(res.data.food);
         },
         (err) => {
           console.log("axios call with index fail", err);
@@ -86,7 +74,23 @@ function PotluckFood(props) {
     const newData = [...foodData];
     newData[i].username = localStorage.getItem("username");
     setFoodData(newData);
-    axios.post();
+    axios
+      .put("https://potluck-back-end.herokuapp.com/api/potlucks/2/1", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log("put request succeeded");
+        // axios
+        //   .get("https://potluck-back-end.herokuapp.com/api/potlucks/2")
+        //   .then((res) => {
+        //     console.log("after assign, get axios", res.data);
+        //   });
+      })
+      .catch((err) => {
+        console.log("failing put request", err);
+      });
   };
 
   return (
