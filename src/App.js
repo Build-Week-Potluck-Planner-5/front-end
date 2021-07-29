@@ -7,6 +7,7 @@ import Header from './Components/Header'
 import Hero from './Components/Hero'
 import Content from "./Components/Content";
 import Footer from "./Components/Footer";
+import Dashboard from "./Components/Dashboard";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <PotluckFood />
           <PotluckInvites /> 
           <CreatePotluck />*/}
-
+          <Dashboard/>
         </Route>
       </Switch>
       <Footer />

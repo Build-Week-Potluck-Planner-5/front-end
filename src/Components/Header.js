@@ -31,7 +31,7 @@ function Header () {
             <nav>
             <Link to='/' style={{ textDecoration: 'none' }}>
                 <div>
-                    <img src='' alt=''/>
+                    {/* <img src='' alt=''/>  logo*/}
                 </div>
             </Link>
                 <div className='link'> 
@@ -42,6 +42,9 @@ function Header () {
                 </div>
                 <div className='link'>
                     <Link to ='/login' style={{ textDecoration: 'none' }}><p>Login</p></Link>
+                </div>
+                <div className='link'>
+                    <Link to ='/dashboard' style={{ textDecoration: 'none' }}><p>Dashboard</p></Link>
                 </div>
             </nav>
         </header>
