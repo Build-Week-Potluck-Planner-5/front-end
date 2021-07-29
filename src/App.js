@@ -6,7 +6,11 @@ import Header from "./Components/Header";
 import Hero from "./Components/Hero";
 import Content from "./Components/Content";
 import Footer from "./Components/Footer";
-import PotluckFood from "./Components/PotluckFood";
+
+import Dashboard from "./Components/Dashboard";
+import MyPotlucks from "./Components/MyPotlucks"
+import PotluckFood from "./Components/PotluckFood"
+import CreatePotluck from "./Components/CreatePotluck"
 
 function App() {
   return (
@@ -24,11 +28,17 @@ function App() {
           <Login />
         </Route>
         <Route path="/dashboard">
-          {/* <MyPotlucks /> */}
-          <PotluckFood />
-          {/* <PotluckInvites />  */}
-          {/* <CreatePotluck /> */}
+          <Dashboard/>
         </Route>
+      <Route path="/mypotlucks">
+          <MyPotlucks />
+      </Route>
+      <Route path="/potluckfood">
+        <PotluckFood/>
+      </Route>
+      <Route path='/createpotluck'>
+        <CreatePotluck/>
+      </Route>
       </Switch>
       <Footer />
     </div>

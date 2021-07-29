@@ -4,10 +4,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledContent = styled.div`
-    background-color: #F4F4F4;
+    border: 2px solid #DADADA;
     margin: 2% 5%;
     padding: 2% 0;
-
+    align-content: none;
     .infoImg1{
         background-image: url('https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80');
         width: 22rem;
@@ -26,7 +26,7 @@ const StyledContent = styled.div`
 
     .row{
         display:flex;
-        border-bottom:1px solid gray;
+        border-bottom:1px solid #DADADA;
         margin: 6% 15%;
         padding-bottom: 2%;
     }
