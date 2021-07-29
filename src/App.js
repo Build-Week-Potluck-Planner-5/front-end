@@ -1,5 +1,4 @@
 import { Switch, Link, Route } from "react-router-dom";
-import logo from "./logo.svg";
 import "./App.css";
 import Registration from "./Components/Registration";
 import Login from "./Components/Login";
