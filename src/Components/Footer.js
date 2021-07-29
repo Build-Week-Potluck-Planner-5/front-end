@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledFooter = styled.div`
-    background-color: #F4F4F4;
     margin: 2% 5%;
     padding: 2% 0;
 `
