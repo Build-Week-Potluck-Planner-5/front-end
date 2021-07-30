@@ -12,76 +12,80 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import axiosWithAuth from "../axiosWithAuth";
 
-// function foodList(){
-// return <ul></ul>
-// }
-// function foodListItem(){
-//     return <li>{name}</li>
-// }
 const initialFoodList = [];
 
 function PotluckFood(props) {
-  const [baseData, setBaseData] = useState([
-    {
-      food_name: "tomatoes",
-      food_owner: "Jordan",
-    },
-    {
-      food_name: "pickles",
-      food_owner: "Josh",
-    },
-    {
-      food_name: "bread",
-      food_owner: null,
-    },
-  ]);
-
+  const username = localStorage.getItem("username");
   const [foodData, setFoodData] = useState(initialFoodList);
   const handleCancel = (foodItem, i) => {
-    const toCancelData = [...baseData];
-    toCancelData[i].food_owner = null;
-    setBaseData(toCancelData);
-  };
-
-  const handleAssign = (foodItem, i) => {
-    const newData = [...baseData];
-    newData[i].food_owner = localStorage.getItem("username");
-    setBaseData(newData);
-  };
-  useEffect(() => {
-    axios
-      .get("url")
-      .then((resp) => {
-        setFoodData(resp.data);
+    axiosWithAuth()
+      .put(`/api/potlucks/2/${foodItem.food_id}/cancel`)
+      .then((res) => {
+        console.log("put request succeeded");
+        const toCancelData = [...foodData];
+        toCancelData[i].username = null;
+        setFoodData(toCancelData);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("failing put request", err);
       });
-  });
+  };
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/api/potlucks/2")
+      .then(
+        (res) => {
+          console.log("axios call with index", res.data);
+          setFoodData(res.data.food);
+        },
+        (err) => {
+          console.log("axios call with index fail", err);
+        }
+      );
+  }, []);
+
+  const handleAssign = (foodItem, i) => {
+    axiosWithAuth()
+      .put(`/api/potlucks/2/${foodItem.food_id}/assign`)
+      .then((res) => {
+        console.log("put request succeeded");
+        const newData = [...foodData];
+        newData[i].username = localStorage.getItem("username");
+        setFoodData(newData);
+      })
+      .catch((err) => {
+        console.log("failing put request", err);
+      });
+  };
   return (
     <div>
       <ul>
-        {baseData.map((foodItem, i) => {
+        {foodData.map((foodItem, i) => {
           return (
-            <li>
+            <li key={i}>
               {foodItem.food_name}{" "}
               <button
-                disabled={foodItem.food_owner}
+                disabled={foodItem.username}
                 onClick={() => {
                   handleAssign(foodItem, i);
                 }}
               >
                 Bring Food
               </button>
-              <button
-                onClick={() => {
-                  handleCancel(foodItem, i);
-                }}
-              >
-                X
-              </button>
+              {username === foodItem.username ? (
+                <button
+                  onClick={() => {
+                    handleCancel(foodItem, i);
+                  }}
+                >
+                  X
+                </button>
+              ) : (
+                <></>
+              )}
             </li>
           );
         })}
