@@ -22,7 +22,7 @@ const initialState = {
   time: "",
   location: "",
   host: "",
-  items: "",
+  food: "",
 };
 
 function CreatePotluck() {
@@ -48,7 +48,7 @@ function CreatePotluck() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    const itemsStringArray = form.items.split(",").map((item) => item.trim());
+    const itemsStringArray = form.food.split(",").map((item) => item.trim());
     const itemsArray = itemsStringArray.map((item) => {
       return { itemid: Date.now(), name: item, guest: "", picked: false };
     });
@@ -59,7 +59,7 @@ function CreatePotluck() {
       time: form.time,
       location: form.location,
       host: form.host,
-      items: itemsArray,
+      food: itemsArray,
     };
     console.log(newPotluck);
     axiosWithAuth()
@@ -121,9 +121,9 @@ function CreatePotluck() {
         Food and Beverages
         <input
           onChange={formChangeHandler}
-          value={form.items}
+          value={form.food}
           placeholder="Potluck Items"
-          name="items"
+          name="food"
           type="text"
           required
         />
