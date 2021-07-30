@@ -2,12 +2,12 @@ import React, {useState, useEffect} from "react"
 import {axiosWithAuth} from "../axiosWithAuth"
 import {useHistory} from "react-router-dom"
 
-const initialState = {name: "", date: "", time: "", location: "", items: "", newItem: ""}
+const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potluck_location: "", organizer: "", food: ""}
 
 function DeleteItems(props) {
     const {obj, currItems, setCurrItems}= props
     const deleteItemClick = (id) => {
-        axiosWithAuth().delete(`api${id}`) //potluck items api
+        axiosWithAuth().delete(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //potluck items api
         setCurrItems(currItems.filter(item=>item.itemid!==id))
       }
     return (
@@ -18,19 +18,19 @@ function EditPotluck() {
     const [form, setForm] = useState(initialState)
     const [potluckData, setPotluckData] = useState({})
     const [currItems, setCurrItems] = useState([])
-    const [newItem, setNewItem] = useState({name: "", guest: "", picked: false})
+    const [newItem, setNewItem] = useState({potluck_name: "", guest: "", picked: false})
 
     const history = useHistory()
     const {id} = useParams()
 
     useEffect(() => {
-        axiosWithAuth().get(`api${id}`) //ptluck api
+        axiosWithAuth().get(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //ptluck api
         .then(res=>{
           console.log(res)
           setPotluckData(res.data)
           // const itemsArr = res.data.items.map(obj=>obj.name)
           // const itemsArrToString = itemsArr.join(", ")
-          setForm({...form, name: res.data.name, date: res.data.date, time: res.data.time, location: res.data.location})
+          setForm({...form, potluck_name: res.data.potluck_name, potluck_date: res.data.potluck_date, potluck_time: res.data.potluck_time, location: res.data.location})
           setCurrItems(res.data.items)
         })
         .catch(err=>console.log(err))
@@ -55,22 +55,22 @@ function EditPotluck() {
         //   return {itemid: Date.now(), name: item, guest: "", picked: false}
         // })
         // console.log(itemsArray)
-        const editedPotluck = {...potluckData, name: form.name, location: form.location, date: form.date, time: form.time, items: []}
+        const editedPotluck = {...potluckData, potluck_name: form.potluck_name, location: form.location, potluck_date: form.potluck_date, potluck_time: form.potluck_time, items: []}
         console.log("edited: ",editedPotluck)
-        axiosWithAuth().put(`api${id}`, editedPotluck) //potluck api
+        axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, editedPotluck) //potluck api
           .then(res=>{
             console.log(res);
-            history.push("/") //MyPotluck
+            history.push("/MyPotlucks") //MyPotluck
           })
           .catch(err=>console.log(err))
         
       }
   
         const newItemClick = () => {
-          const createdItem={items: [newItem]}
-          axiosWithAuth().put(`api${id}`, createdItem) //potluck api
+          const createdItem={food: [newItem]}
+          axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, createdItem) //potluck api
           setCurrItems([...currItems, newItem])
-          setNewItem({name: "", guest: "", picked: false})
+          setNewItem({potluck_name: "", guest: "", picked: false})
         }
 
     return (
@@ -79,9 +79,9 @@ function EditPotluck() {
                 Name
                 <input
                   onChange={formChangeHandler}
-                  value={form.name}
+                  value={form.potluck_name}
                   placeholder="Potluck Name"
-                  name="name"
+                  name="potluck_name"
                   type="text"
                   required
                 /></label>
@@ -89,9 +89,9 @@ function EditPotluck() {
                 Date
                 <input
                   onChange={formChangeHandler}
-                  value={form.date}
+                  value={form.potluck_date}
                   placeholder="Potluck Date"
-                  name="date"
+                  name="potluck_date"
                   type="text"
                   required
                 /></label>
@@ -99,9 +99,9 @@ function EditPotluck() {
                 Time
                 <input
                   onChange={formChangeHandler}
-                  value={form.time}
+                  value={form.potluck_time}
                   placeholder="Potluck Time"
-                  name="time"
+                  name="potluck_time"
                   type="text"
                   required
                 /></label>
@@ -117,7 +117,7 @@ function EditPotluck() {
             /></label>
             <p>Food and Beverages</p>
                 <div>
-                {currItems.length<1 ? <p>This potluck has no items! Add an item below.</p> : currItems.map((obj) => {
+                {currItems.length<1 ? <p>No Items in Potluck. Add items below.</p> : currItems.map((obj) => {
                   return (
                     <DeleteItems obj={obj} setCurrItems={setCurrItems} currItems={currItems} />
                     )})

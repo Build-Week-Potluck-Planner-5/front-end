@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react"
-import axios from "axios"
 import {axiosWithAuth} from "../axiosWithAuth"
 import {useHistory} from "react-router-dom"
 
@@ -13,23 +12,25 @@ import {useHistory} from "react-router-dom"
 // potluck_invitees (same as food items -- want an input field plus a button to add another invitee)
 // submit
 
-const initialState = {name: "", date: "", time: "", location: "", host: "", items: ""}
+const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potluck_location: "", organizer: "", food: ""}
 
 function CreatePotluck() {
     const [form, setForm] = useState(initialState)
     const [currUser, setCurrUser] = useState({})
-    // const [formError, setFormError] = useState("")
+    const [formError, setFormError] = useState("")
     const history = useHistory()
 
     useEffect(() => {
-        axiosWithAuth().get("") //user api
+        axiosWithAuth().get("https://potluck-back-end.herokuapp.com/api/users") //user api
         .then(res=>{
-          // console.log(res)
+          console.log(res)
           setCurrUser(res.data)
-          setForm({...form, host: res.data.username})
+          setForm({...form, organizer: res.data.username})
         })
         .catch(err=>console.log(err))
       },[])
+
+      console.log(currUser)
   
       const formChangeHandler = (e) => {
         setForm({...form,
@@ -38,17 +39,17 @@ function CreatePotluck() {
 
       const formSubmit = (e) => {
         e.preventDefault();
-        const itemsStringArray = form.items.split(",").map(item=>item.trim())
+        const itemsStringArray = form.food.split(",").map(item=>item.trim())
         const itemsArray = itemsStringArray.map(item=>{
           return {itemid: Date.now(), name: item, guest: "", picked: false}
         })
         console.log(itemsArray)
-        const newPotluck = {name: form.name, date: form.date, time: form.time, location: form.location, host: form.host, items: itemsArray}
+        const newPotluck = {potluck_name: form.potluck_name, potluck_date: form.potluck_date, potluck_time: form.potluck_time, potluck_location: form.potluck_location, organizer: form.organizer, food: itemsArray}
         console.log(newPotluck)
-        axiosWithAuth().post("", newPotluck) //potluck api
+        axiosWithAuth().post("https://potluck-back-end.herokuapp.com/api/potlucks", newPotluck) //potluck api
           .then(res=>{
             console.log(res);
-            history.push("/") //My Potlucks
+            history.push("/MyPotlucks") //My Potlucks
           })
           .catch(err=>console.log(err))
       }
@@ -59,9 +60,9 @@ function CreatePotluck() {
                 Name
                 <input
                   onChange={formChangeHandler}
-                  value={form.name}
+                  value={form.potluck_name}
                   placeholder="Potluck Name"
-                  name="name"
+                  name="potluck_name"
                   type="text"
                   required
                 /></label>
@@ -69,9 +70,9 @@ function CreatePotluck() {
                 Date
                 <input
                   onChange={formChangeHandler}
-                  value={form.date}
+                  value={form.potluck_date}
                   placeholder="Potluck Date"
-                  name="date"
+                  name="potluck_date"
                   type="text"
                   required
                 /></label>
@@ -79,9 +80,9 @@ function CreatePotluck() {
                 Time
                 <input
                   onChange={formChangeHandler}
-                  value={form.time}
+                  value={form.potluck_time}
                   placeholder="Potluck Time"
-                  name="time"
+                  name="potluck_time"
                   type="text"
                   required
                 /></label>
@@ -89,9 +90,9 @@ function CreatePotluck() {
                 Location
                 <input
                   onChange={formChangeHandler}
-                  value={form.location}
+                  value={form.potluck_location}
                   placeholder="Potluck Address"
-                  name="location"
+                  name="potluck_location"
                   type="text"
                   required
             /></label>
@@ -99,10 +100,10 @@ function CreatePotluck() {
                 Food and Beverages
                 <input
                   onChange={formChangeHandler}
-                  value={form.items}
+                  value={form.food}
                   placeholder="Potluck Items"
-                  name="items"
-                  type="text"
+                  name="food"
+                  className="longInput"
                   required
             /></label>
             <button>Create Potluck</button>

@@ -6,6 +6,6 @@ export const axiosWithAuth = () => {
         headers: {
             Authorization: token
         },
-        baseURL: "api here"
+        baseURL: "https://potluck-back-end.herokuapp.com"
     })
 }
