@@ -189,3 +189,27 @@ RESPONSE
     ]
 
 **[GET] /api/potlucks/foods**
+RESPONSE
+    [
+        {
+            "food_name": "hamburgers"
+        },
+        {
+            "food_name": "potato salad"
+        }
+    ]
+
+**[PUT] /api/potlucks/:potluck_id/rsvp**
+REQUEST
+    Request must be formatted like this --
+    {
+        attending: boolean
+    }
+
+RESPONSE
+    {
+        "potluck_invite_id": 19,
+        "potluck_id": 5,
+        "user_id": 5,
+        "attending": true
+    }
