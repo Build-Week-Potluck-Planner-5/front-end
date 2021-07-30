@@ -7,7 +7,7 @@ const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potl
 function DeleteItems(props) {
     const {obj, currItems, setCurrItems}= props
     const deleteItemClick = (id) => {
-        axiosWithAuth().delete(`/api/potlucks/:potluck_id${id}`) //potluck items api
+        axiosWithAuth().delete(`/api/potlucks/${id}`) //potluck items api
         setCurrItems(currItems.filter(item=>item.food_name!==id))
       }
     return (
@@ -24,7 +24,7 @@ function EditPotluck() {
     const {id} = useParams()
 
     useEffect(() => {
-        axiosWithAuth().get(`/api/potlucks/:potluck_id${id}`) //ptluck api
+        axiosWithAuth().get(`/api/potlucks/${id}`) //ptluck api
         .then(res=>{
           console.log(res)
           setPotluckData(res.data)
@@ -57,7 +57,7 @@ function EditPotluck() {
         // console.log(itemsArray)
         const editedPotluck = {...potluckData, potluck_name: form.potluck_name, location: form.location, potluck_date: form.potluck_date, potluck_time: form.potluck_time, items: []}
         console.log("edited: ",editedPotluck)
-        axiosWithAuth().put(`/api/potlucks/:potluck_id${id}`, editedPotluck) //potluck api
+        axiosWithAuth().put(`/api/potlucks/${id}`, editedPotluck) //potluck api
           .then(res=>{
             console.log(res);
             history.push("") 
@@ -68,7 +68,7 @@ function EditPotluck() {
   
         const newItemClick = () => {
           const createdItem={food: [newItem]}
-          axiosWithAuth().put(`/api/potlucks/:potluck_id${id}`, createdItem) //potluck api
+          axiosWithAuth().put(`/api/potlucks/${id}`, createdItem) //potluck api
           setCurrItems([...currItems, newItem])
           setNewItem({potluck_name: "", guest: "", picked: false})
         }
