@@ -11,7 +11,7 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import axiosWithAuth from "../axiosWithAuth";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
@@ -85,7 +85,7 @@ function PotluckFood(props) {
           console.log("axios call with index fail", err);
         }
       );
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleAssign = (foodItem, i) => {
     axiosWithAuth()

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import axiosWithAuth from "../axiosWithAuth";
 import { useHistory } from "react-router-dom";
 
@@ -27,7 +27,7 @@ const initialState = {
 
 function CreatePotluck() {
   const [form, setForm] = useState(initialState);
-  const [currUser, setCurrUser] = useState({});
+  // const [currUser, setCurrUser] = useState({});
   // const [formError, setFormError] = useState("")
   const history = useHistory();
 
@@ -36,11 +36,11 @@ function CreatePotluck() {
       .get("") //user api
       .then((res) => {
         // console.log(res)
-        setCurrUser(res.data);
+        // setCurrUser(res.data);
         setForm({ ...form, host: res.data.username });
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, []); //eslint-disable-line
 
   const formChangeHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

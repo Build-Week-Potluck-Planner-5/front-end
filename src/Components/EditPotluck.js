@@ -34,7 +34,7 @@ function EditPotluck() {
           setCurrItems(res.data.food)
         })
         .catch(err=>console.log(err))
-      },[])
+      },[]) //eslint-disable-line
   
       // console.log(currUser)
 

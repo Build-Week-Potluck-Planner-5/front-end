@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { reach } from "yup";
 import axios from "axios";

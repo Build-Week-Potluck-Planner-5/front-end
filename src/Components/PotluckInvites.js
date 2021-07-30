@@ -25,7 +25,7 @@ const Potluck = (props) => {
           console.log("potluck rsvp error", err);
         });
     }
-  }, [rsvp]);
+  }, [rsvp]); //eslint-disable-line
   const handleAccept = () => {
     setRsvp({ attending: true });
   };
