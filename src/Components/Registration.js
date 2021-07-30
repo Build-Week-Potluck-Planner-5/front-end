@@ -2,8 +2,8 @@ import { useHistory } from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 import { reach } from "yup";
-import React, { useState, useEffect } from "react";
-import { set } from "lodash";
+import React, { useState } from "react";
+// import { set } from "lodash";
 import styled from "styled-components";
 
 const StyledRegister = styled.div`
