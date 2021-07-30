@@ -33,8 +33,8 @@ function App() {
       <Route path="/mypotlucks">
           <MyPotlucks />
       </Route>
-      <Route path="/potluckfood">
-        <PotluckFood/>
+      <Route path="/potluckinvites">
+        <PotluckInvites/>
       </Route>
       <Route path='/createpotluck'>
         <CreatePotluck/>
