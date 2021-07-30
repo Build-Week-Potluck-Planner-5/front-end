@@ -30,10 +30,6 @@ const StyledDashboard = styled.div`
   }
 
   .color1 {
-    background-color: #7172f7;
-    padding: 1rem 5rem 2rem 2.5rem;
-    border: 1px solid #dadada;
-    border-top: none;
   }
 
   .color2 {

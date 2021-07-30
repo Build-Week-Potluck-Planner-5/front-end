@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosWithAuth from "../axiosWithAuth";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const StyledFoodList = styled.div`
   .listItem {
@@ -56,11 +56,12 @@ const StyledFoodList = styled.div`
 const initialFoodList = [];
 
 function PotluckFood(props) {
+  const { potluck_id } = useParams();
   const username = localStorage.getItem("username");
   const [foodData, setFoodData] = useState(initialFoodList);
   const handleCancel = (foodItem, i) => {
     axiosWithAuth()
-      .put(`/api/potlucks/2/${foodItem.food_id}/cancel`)
+      .put(`/api/potlucks/${potluck_id}/${foodItem.food_id}/cancel`)
       .then((res) => {
         console.log("put request succeeded");
         const toCancelData = [...foodData];
@@ -74,7 +75,7 @@ function PotluckFood(props) {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/api/potlucks/2")
+      .get(`/api/potlucks/${potluck_id}`)
       .then(
         (res) => {
           console.log("axios call with index", res.data);
@@ -88,7 +89,7 @@ function PotluckFood(props) {
 
   const handleAssign = (foodItem, i) => {
     axiosWithAuth()
-      .put(`/api/potlucks/2/${foodItem.food_id}/assign`)
+      .put(`/api/potlucks/${potluck_id}/${foodItem.food_id}/assign`)
       .then((res) => {
         console.log("put request succeeded");
         const newData = [...foodData];
@@ -104,7 +105,7 @@ function PotluckFood(props) {
       <div className="color1 titleDiv">
         <h1>Choose a food to bring...</h1>
         <div>
-          <Link to="/dashboard">
+          <Link to="/mypotlucks">
             <button className="button buttonHover">My Potlucks</button>
           </Link>
         </div>
