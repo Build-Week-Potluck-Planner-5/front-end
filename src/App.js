@@ -14,7 +14,6 @@ import CreatePotluck from "./Components/CreatePotluck";
 import PotluckInvites from "./Components/PotluckInvites";
 import EditPotluck from "./Components/EditPotluck";
 
-
 function App() {
   return (
     <div className="App">
@@ -33,21 +32,21 @@ function App() {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
-         <Route path="/mypotlucks">
+        <Route path="/mypotlucks">
           <MyPotlucks />
-        </Route> 
-        <Route path="/potluckfood">
+        </Route>
+        <Route path="/potluckfood/:potluck_id">
           <PotluckFood />
         </Route>
         <Route path="/createpotluck">
           <CreatePotluck />
         </Route>
         <Route path="/editpotluck">
-        <EditPotluck/>
-      </Route>
-      <Route path="/potluckinvites">
-        <PotluckInvites/>
-      </Route>
+          <EditPotluck />
+        </Route>
+        <Route path="/potluckinvites">
+          <PotluckInvites />
+        </Route>
       </Switch>
       <Footer />
     </div>
