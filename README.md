@@ -78,14 +78,29 @@ RESPONSE
 ]
 
 **[GET] /api/potlucks/invites**
-fetches all potlucks for the current logged in user where attending === false
+fetches all potlucks for the current logged in user where the user is not attending and has not yet rsvp'd
+
+Note -- the client should probably only display potlucks in the potlucks invites table where rsvp === false
+
 RESPONSE
 [
     {
-        "potluck_name": "barbeque",
-        "potluck_date": "July",
-        "potluck_time": "8pm",
-        "organizer": "foobar"
+        "potluck_invite_id": 9,
+        "potluck_id": 3,
+        "potluck_name": "new potluck",
+        "potluck_date": "August 10",
+        "potluck_time": "7pm",
+        "organizer": "test",
+        "rsvp": false
+    },
+    {
+        "potluck_invite_id": 13,
+        "potluck_id": 4,
+        "potluck_name": "new potluck",
+        "potluck_date": "August 10",
+        "potluck_time": "7pm",
+        "organizer": "test",
+        "rsvp": false
     }
 ]
 
@@ -213,3 +228,8 @@ RESPONSE
         "user_id": 5,
         "attending": true
     }
+
+**[PUT] /api/potlucks/:potluck_id/:food_id/assign**
+
+**[PUT] /api/potlucks/:potluck_id/:food_id/cancel**
+
