@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from "react"
-import {axiosWithAuth} from "../axiosWithAuth"
-import {useHistory} from "react-router-dom"
+import axiosWithAuth from "../axiosWithAuth";
+import {useHistory, useParams} from "react-router-dom"
 
-const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potluck_location: "", organizer: "", food: ""}
+const initialState = {potluck_name: "", potluck_date: "", potluck_time: "", potluck_location: "", organizer: "", food_name: ""}
 
 function DeleteItems(props) {
     const {obj, currItems, setCurrItems}= props
     const deleteItemClick = (id) => {
-        axiosWithAuth().delete(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //potluck items api
-        setCurrItems(currItems.filter(item=>item.itemid!==id))
+        axiosWithAuth().delete(`/api/potlucks/:potluck_id${id}`) //potluck items api
+        setCurrItems(currItems.filter(item=>item.food_name!==id))
       }
     return (
-        <button onClick={()=>deleteItemClick(obj.itemid)}>-</button>)
+        <button onClick={()=>deleteItemClick(obj.food_name)}>-</button>)
     }
 
 function EditPotluck() {
@@ -24,14 +24,14 @@ function EditPotluck() {
     const {id} = useParams()
 
     useEffect(() => {
-        axiosWithAuth().get(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`) //ptluck api
+        axiosWithAuth().get(`/api/potlucks/:potluck_id${id}`) //ptluck api
         .then(res=>{
           console.log(res)
           setPotluckData(res.data)
           // const itemsArr = res.data.items.map(obj=>obj.name)
           // const itemsArrToString = itemsArr.join(", ")
           setForm({...form, potluck_name: res.data.potluck_name, potluck_date: res.data.potluck_date, potluck_time: res.data.potluck_time, location: res.data.location})
-          setCurrItems(res.data.items)
+          setCurrItems(res.data.food)
         })
         .catch(err=>console.log(err))
       },[])
@@ -52,15 +52,15 @@ function EditPotluck() {
         e.preventDefault();
         // const itemsStringArray = form.items.split(",").map(item=>item.trim())
         // const itemsArray = itemsStringArray.map(item=>{
-        //   return {itemid: Date.now(), name: item, guest: "", picked: false}
+        //   return {food_item: Date.now(), name: item, guest: "", picked: false}
         // })
         // console.log(itemsArray)
         const editedPotluck = {...potluckData, potluck_name: form.potluck_name, location: form.location, potluck_date: form.potluck_date, potluck_time: form.potluck_time, items: []}
         console.log("edited: ",editedPotluck)
-        axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, editedPotluck) //potluck api
+        axiosWithAuth().put(`/api/potlucks/:potluck_id${id}`, editedPotluck) //potluck api
           .then(res=>{
             console.log(res);
-            history.push("/MyPotlucks") //MyPotluck
+            history.push("") 
           })
           .catch(err=>console.log(err))
         
@@ -68,7 +68,7 @@ function EditPotluck() {
   
         const newItemClick = () => {
           const createdItem={food: [newItem]}
-          axiosWithAuth().put(`https://potluck-back-end.herokuapp.com/api/potlucks${id}`, createdItem) //potluck api
+          axiosWithAuth().put(`/api/potlucks/:potluck_id${id}`, createdItem) //potluck api
           setCurrItems([...currItems, newItem])
           setNewItem({potluck_name: "", guest: "", picked: false})
         }
@@ -83,7 +83,6 @@ function EditPotluck() {
                   placeholder="Potluck Name"
                   name="potluck_name"
                   type="text"
-                  required
                 /></label>
             <label>
                 Date
@@ -93,7 +92,6 @@ function EditPotluck() {
                   placeholder="Potluck Date"
                   name="potluck_date"
                   type="text"
-                  required
                 /></label>
             <label>
                 Time
@@ -103,7 +101,6 @@ function EditPotluck() {
                   placeholder="Potluck Time"
                   name="potluck_time"
                   type="text"
-                  required
                 /></label>
             <label>
                 Location
@@ -113,7 +110,6 @@ function EditPotluck() {
                   placeholder="Potluck Address"
                   name="location"
                   type="text"
-                  required
             /></label>
             <p>Food and Beverages</p>
                 <div>
@@ -131,7 +127,6 @@ function EditPotluck() {
                   placeholder="New Item"
                   name="name"
                   type="text"
-                  required
                  /></div> 
                  <button>Save Changes</button>
         </form>
