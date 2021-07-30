@@ -60,23 +60,23 @@ function Dashboard () {
         </div>
 
         <div className='container'>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/mypotlucks' style={{ textDecoration: 'none' }}>
                 <div className = 'links'>
                     <h3>My Potlucks</h3>
                 </div>
                 <div className='color1'></div>
             </Link>
 
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/createpotluck' style={{ textDecoration: 'none' }}>
                 <div className = 'links'>
                     <h3>Create a Potluck</h3>
                 </div>
                 <div className='color2'></div>
             </Link>
 
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/potluckinvites' style={{ textDecoration: 'none' }}>
                 <div className = 'links'>
-                    <h3>Potluck invites</h3>
+                    <h3>Potluck Invites</h3>
                 </div>
                 <div className='color3'></div>
             </Link>
