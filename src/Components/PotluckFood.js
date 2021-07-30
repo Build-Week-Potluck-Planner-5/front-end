@@ -13,6 +13,45 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosWithAuth from "../axiosWithAuth";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+const StyledFoodList = styled.div`
+  .listItem {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2.5px solid #7172f7;
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 8px;
+  }
+  .list {
+    list-style-type: none;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .color1 {
+    background-color: #7172f7;
+    padding: 1rem 5rem 2rem 2.5rem;
+    border: 1px solid #dadada;
+    border-top: none;
+  }
+  .button {
+    border-radius: 8px;
+  }
+  .cancelButton {
+    border-radius: 8px;
+  }
+  .buttonHover:hover {
+    box-shadow: 0 5px 8px 0 rgba(185, 113, 247, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+  .titleDiv {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+`;
 
 const initialFoodList = [];
 
@@ -61,13 +100,22 @@ function PotluckFood(props) {
       });
   };
   return (
-    <div>
-      <ul>
+    <StyledFoodList>
+      <div className="color1 titleDiv">
+        <h1>Choose a food to bring...</h1>
+        <div>
+          <Link to="/dashboard">
+            <button className="button buttonHover">My Potlucks</button>
+          </Link>
+        </div>
+      </div>
+      <ul className="list">
         {foodData.map((foodItem, i) => {
           return (
-            <li key={i}>
+            <li key={i} className="listItem">
               {foodItem.food_name}{" "}
               <button
+                className="button buttonHover"
                 disabled={foodItem.username}
                 onClick={() => {
                   handleAssign(foodItem, i);
@@ -77,6 +125,7 @@ function PotluckFood(props) {
               </button>
               {username === foodItem.username ? (
                 <button
+                  className="cancelButton buttonHover"
                   onClick={() => {
                     handleCancel(foodItem, i);
                   }}
@@ -90,7 +139,8 @@ function PotluckFood(props) {
           );
         })}
       </ul>
-    </div>
+      <div className="color1"></div>
+    </StyledFoodList>
   );
 }
 

@@ -3,11 +3,22 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { reach } from "yup";
 import axios from "axios";
+import styled from "styled-components";
 
-// username
-// password
-// submit button
-// nice to have -- form validation and error handling messages
+const StyledLogin = styled.div`
+  .color1 {
+    background-color: #7172f7;
+    padding: 1rem 2rem 1rem 2rem;
+    border: 1px solid #dadada;
+    border-top: none;
+  }
+  .form {
+    justify-content: center;
+    display: flex;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+`;
 
 function Login(props) {
   const initialFormErrors = {
@@ -52,14 +63,7 @@ function Login(props) {
       username: userData.username,
       password: userData.password,
     };
-    // axios
-    //   .post("https://potluck-back-end.herokuapp.com/api/auth/login", userData)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+
     axios
       .post(
         "https://potluck-back-end.herokuapp.com/api/auth/login",
@@ -76,32 +80,37 @@ function Login(props) {
       });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          onChange={handleChange}
-          value={userData.username}
-          placeholder="Username"
-          name="username"
-          type="text"
-          required
-        ></input>
-        <input
-          onChange={handleChange}
-          value={userData.password}
-          placeholder="Password"
-          name="password"
-          type="password"
-          required
-        ></input>
-
-        <button>Submit</button>
+    <StyledLogin>
+      <h1>Login</h1>
+      <div className="color1"></div>
+      <form className="form" onSubmit={handleSubmit}>
         <div>
-          <p>{loginErr.username}</p>
-          <p>{loginErr.password}</p>
+          <input
+            onChange={handleChange}
+            value={userData.username}
+            placeholder="Username"
+            name="username"
+            type="text"
+            required
+          ></input>
+          <input
+            onChange={handleChange}
+            value={userData.password}
+            placeholder="Password"
+            name="password"
+            type="password"
+            required
+          ></input>
+
+          <button>Submit</button>
+          <div>
+            <p>{loginErr.username}</p>
+            <p>{loginErr.password}</p>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <div className="color1"></div>
+    </StyledLogin>
   );
 }
 
