@@ -37,11 +37,9 @@ const StyledFoodList = styled.div`
     border-top: none;
   }
   .button {
-    border: 1px solid #b971f7;
     border-radius: 8px;
   }
   .cancelButton {
-    border: 1px solid #f771f7;
     border-radius: 8px;
   }
   .buttonHover:hover {
