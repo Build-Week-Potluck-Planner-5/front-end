@@ -68,7 +68,7 @@ function Login(props) {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.message.split(", ")[1]);
+        localStorage.setItem("username", res.data.username);
         history.push("/dashboard");
       })
       .catch((err) => {

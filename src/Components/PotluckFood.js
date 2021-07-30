@@ -12,53 +12,30 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { axiosWithAuth } from "../axiosWithAuth";
+import axiosWithAuth from "../axiosWithAuth";
 
-const initialFoodList = [
-  // {
-  //   food_name: "tomatoes",
-  //   username: null,
-  // },
-  // {
-  //   food_name: "pickles",
-  //   username: "Josh",
-  // },
-  // {
-  //   food_name: "bread",
-  //   username: null,
-  // },
-];
+const initialFoodList = [];
 
 function PotluckFood(props) {
-  // const [baseData, setBaseData] = useState([
-  //   {
-  //     food_name: "tomatoes",
-  //     food_owner: "Jordan",
-  //   },
-  //   {
-  //     food_name: "pickles",
-  //     food_owner: "Josh",
-  //   },
-  //   {
-  //     food_name: "bread",
-  //     food_owner: null,
-  //   },
-  // ]);
   const username = localStorage.getItem("username");
   const [foodData, setFoodData] = useState(initialFoodList);
   const handleCancel = (foodItem, i) => {
-    const toCancelData = [...foodData];
-    toCancelData[i].username = null;
-    setFoodData(toCancelData);
+    axiosWithAuth()
+      .put(`/api/potlucks/2/${foodItem.food_id}/cancel`)
+      .then((res) => {
+        console.log("put request succeeded");
+        const toCancelData = [...foodData];
+        toCancelData[i].username = null;
+        setFoodData(toCancelData);
+      })
+      .catch((err) => {
+        console.log("failing put request", err);
+      });
   };
 
   useEffect(() => {
-    axios
-      .get("https://potluck-back-end.herokuapp.com/api/potlucks/2", {
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
+    axiosWithAuth()
+      .get("/api/potlucks/2")
       .then(
         (res) => {
           console.log("axios call with index", res.data);
@@ -71,34 +48,24 @@ function PotluckFood(props) {
   }, []);
 
   const handleAssign = (foodItem, i) => {
-    const newData = [...foodData];
-    newData[i].username = localStorage.getItem("username");
-    setFoodData(newData);
-    axios
-      .put("https://potluck-back-end.herokuapp.com/api/potlucks/2/1", {
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
+    axiosWithAuth()
+      .put(`/api/potlucks/2/${foodItem.food_id}/assign`)
       .then((res) => {
         console.log("put request succeeded");
-        // axios
-        //   .get("https://potluck-back-end.herokuapp.com/api/potlucks/2")
-        //   .then((res) => {
-        //     console.log("after assign, get axios", res.data);
-        //   });
+        const newData = [...foodData];
+        newData[i].username = localStorage.getItem("username");
+        setFoodData(newData);
       })
       .catch((err) => {
         console.log("failing put request", err);
       });
   };
-
   return (
     <div>
       <ul>
         {foodData.map((foodItem, i) => {
           return (
-            <li>
+            <li key={i}>
               {foodItem.food_name}{" "}
               <button
                 disabled={foodItem.username}

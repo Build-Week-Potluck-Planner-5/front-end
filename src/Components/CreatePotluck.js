@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react"
-import axios from "axios"
-import {axiosWithAuth} from "../axiosWithAuth"
-import {useHistory} from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import axiosWithAuth from "../axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 // ideally a modal but could be another page
 // form
@@ -13,101 +13,121 @@ import {useHistory} from "react-router-dom"
 // potluck_invitees (same as food items -- want an input field plus a button to add another invitee)
 // submit
 
-const initialState = {name: "", date: "", time: "", location: "", host: "", items: ""}
+const initialState = {
+  name: "",
+  date: "",
+  time: "",
+  location: "",
+  host: "",
+  items: "",
+};
 
 function CreatePotluck() {
-    const [form, setForm] = useState(initialState)
-    const [currUser, setCurrUser] = useState({})
-    // const [formError, setFormError] = useState("")
-    const history = useHistory()
+  const [form, setForm] = useState(initialState);
+  const [currUser, setCurrUser] = useState({});
+  // const [formError, setFormError] = useState("")
+  const history = useHistory();
 
-    useEffect(() => {
-        axiosWithAuth().get("") //user api
-        .then(res=>{
-          // console.log(res)
-          setCurrUser(res.data)
-          setForm({...form, host: res.data.username})
-        })
-        .catch(err=>console.log(err))
-      },[])
-  
-      const formChangeHandler = (e) => {
-        setForm({...form,
-          [e.target.name]: e.target.value})
-      }
+  useEffect(() => {
+    axiosWithAuth()
+      .get("") //user api
+      .then((res) => {
+        // console.log(res)
+        setCurrUser(res.data);
+        setForm({ ...form, host: res.data.username });
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-      const formSubmit = (e) => {
-        e.preventDefault();
-        const itemsStringArray = form.items.split(",").map(item=>item.trim())
-        const itemsArray = itemsStringArray.map(item=>{
-          return {itemid: Date.now(), name: item, guest: "", picked: false}
-        })
-        console.log(itemsArray)
-        const newPotluck = {name: form.name, date: form.date, time: form.time, location: form.location, host: form.host, items: itemsArray}
-        console.log(newPotluck)
-        axiosWithAuth().post("", newPotluck) //potluck api
-          .then(res=>{
-            console.log(res);
-            history.push("/") //My Potlucks
-          })
-          .catch(err=>console.log(err))
-      }
+  const formChangeHandler = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-      return (
-          <form onSubmit={formSubmit}> 
-            <label>
-                Name
-                <input
-                  onChange={formChangeHandler}
-                  value={form.name}
-                  placeholder="Potluck Name"
-                  name="name"
-                  type="text"
-                  required
-                /></label>
-            <label>
-                Date
-                <input
-                  onChange={formChangeHandler}
-                  value={form.date}
-                  placeholder="Potluck Date"
-                  name="date"
-                  type="text"
-                  required
-                /></label>
-            <label>
-                Time
-                <input
-                  onChange={formChangeHandler}
-                  value={form.time}
-                  placeholder="Potluck Time"
-                  name="time"
-                  type="text"
-                  required
-                /></label>
-            <label>
-                Location
-                <input
-                  onChange={formChangeHandler}
-                  value={form.location}
-                  placeholder="Potluck Address"
-                  name="location"
-                  type="text"
-                  required
-            /></label>
-            <label>
-                Food and Beverages
-                <input
-                  onChange={formChangeHandler}
-                  value={form.items}
-                  placeholder="Potluck Items"
-                  name="items"
-                  type="text"
-                  required
-            /></label>
-            <button>Create Potluck</button>
-          </form>
-      )
+  const formSubmit = (e) => {
+    e.preventDefault();
+    const itemsStringArray = form.items.split(",").map((item) => item.trim());
+    const itemsArray = itemsStringArray.map((item) => {
+      return { itemid: Date.now(), name: item, guest: "", picked: false };
+    });
+    console.log(itemsArray);
+    const newPotluck = {
+      name: form.name,
+      date: form.date,
+      time: form.time,
+      location: form.location,
+      host: form.host,
+      items: itemsArray,
+    };
+    console.log(newPotluck);
+    axiosWithAuth()
+      .post("", newPotluck) //potluck api
+      .then((res) => {
+        console.log(res);
+        history.push("/"); //My Potlucks
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <form onSubmit={formSubmit}>
+      <label>
+        Name
+        <input
+          onChange={formChangeHandler}
+          value={form.name}
+          placeholder="Potluck Name"
+          name="name"
+          type="text"
+          required
+        />
+      </label>
+      <label>
+        Date
+        <input
+          onChange={formChangeHandler}
+          value={form.date}
+          placeholder="Potluck Date"
+          name="date"
+          type="text"
+          required
+        />
+      </label>
+      <label>
+        Time
+        <input
+          onChange={formChangeHandler}
+          value={form.time}
+          placeholder="Potluck Time"
+          name="time"
+          type="text"
+          required
+        />
+      </label>
+      <label>
+        Location
+        <input
+          onChange={formChangeHandler}
+          value={form.location}
+          placeholder="Potluck Address"
+          name="location"
+          type="text"
+          required
+        />
+      </label>
+      <label>
+        Food and Beverages
+        <input
+          onChange={formChangeHandler}
+          value={form.items}
+          placeholder="Potluck Items"
+          name="items"
+          type="text"
+          required
+        />
+      </label>
+      <button>Create Potluck</button>
+    </form>
+  );
 }
 
-export default CreatePotluck
+export default CreatePotluck;
