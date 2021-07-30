@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import axiosWithAuth from "../axiosWithAuth";
 import { useHistory } from "react-router-dom";
+
 
 // ideally a modal but could be another page
 // form
@@ -12,6 +14,7 @@ import { useHistory } from "react-router-dom";
 // food_items (input field) but also a button to add another food item
 // potluck_invitees (same as food items -- want an input field plus a button to add another invitee)
 // submit
+
 
 const initialState = {
   name: "",

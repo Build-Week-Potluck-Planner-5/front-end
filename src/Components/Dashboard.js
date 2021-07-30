@@ -72,15 +72,32 @@ function Dashboard() {
           <div className="color2"></div>
         </Link>
 
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="links">
-            <h3>Potluck invites</h3>
-          </div>
-          <div className="color3"></div>
-        </Link>
-      </div>
-    </StyledDashboard>
-  );
+
+        <div className='container'>
+            <Link to='/MyPotlucks' style={{ textDecoration: 'none' }}>
+                <div className = 'links'>
+                    <h3>My Potlucks</h3>
+                </div>
+                <div className='color1'></div>
+            </Link>
+
+            <Link to='/CreatePotluck' style={{ textDecoration: 'none' }}>
+                <div className = 'links'>
+                    <h3>Create a Potluck</h3>
+                </div>
+                <div className='color2'></div>
+            </Link>
+
+            <Link to='/PotluckInvites' style={{ textDecoration: 'none' }}>
+                <div className = 'links'>
+                    <h3>Potluck invites</h3>
+                </div>
+                <div className='color3'></div>
+            </Link>
+        </div>
+        </StyledDashboard>
+        
+    )
 }
 
 export default Dashboard;

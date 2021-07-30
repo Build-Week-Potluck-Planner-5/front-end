@@ -11,6 +11,7 @@ import Dashboard from "./Components/Dashboard";
 import MyPotlucks from "./Components/MyPotlucks";
 import PotluckFood from "./Components/PotluckFood";
 import CreatePotluck from "./Components/CreatePotluck";
+import PotluckInvites from "./Components/PotluckInvites"
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
         <Route path="/createpotluck">
           <CreatePotluck />
         </Route>
+      <Route path="/potluckinvites">
+        <PotluckInvites />
+      </Route>
       </Switch>
       <Footer />
     </div>
