@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
-import { useHistory, Link } from "react-router-dom";
-import PotluckInvites from "./PotluckInvites";
-import { set } from "lodash";
+import { Link } from "react-router-dom";
 
 // table with rows that have columns of... potluck_name, potluck_date, potluck_time
 // each row has a food button that either opens a modal or sends you to another food page for that particular potluck
 
 const Potluck = (props) => {
-  const history = useHistory();
   const {
     potluck_name,
     potluck_date,
@@ -16,9 +13,7 @@ const Potluck = (props) => {
     potluck_location,
     potluck_id,
   } = props.potluckData;
-  // const handleClick = () => {
-  //   history.push(`/potluckfood/${potluck_id}`);
-  // };
+
   return (
     <tr className="tableRow">
       <td>{potluck_name}</td>
