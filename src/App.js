@@ -9,7 +9,7 @@ import Footer from "./Components/Footer";
 
 import Dashboard from "./Components/Dashboard";
 import MyPotlucks from "./Components/MyPotlucks"
-import PotluckFood from "./Components/PotluckFood"
+import PotluckInvites from "./Components/PotluckInvites"
 import CreatePotluck from "./Components/CreatePotluck"
 
 function App() {
