@@ -8,7 +8,7 @@ import Content from "./Components/Content";
 import Footer from "./Components/Footer";
 
 import Dashboard from "./Components/Dashboard";
-import MyPotlucks from "./Components/MyPotlucks";
+// import MyPotlucks from "./Components/MyPotlucks";
 import PotluckFood from "./Components/PotluckFood";
 import CreatePotluck from "./Components/CreatePotluck";
 import PotluckInvites from "./Components/PotluckInvites"
@@ -32,9 +32,9 @@ function App() {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
-        <Route path="/mypotlucks">
+        {/* <Route path="/mypotlucks">
           <MyPotlucks />
-        </Route>
+        </Route> */}
         <Route path="/potluckfood">
           <PotluckFood />
         </Route>
